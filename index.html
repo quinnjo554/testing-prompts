@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OpenRouter Prompt Tester</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🔧</div>
+        <h1>OpenRouter Prompt Tester</h1>
+      </div>
+      <div class="controls">
+        <label class="api-key-group">
+          <span>API Key</span>
+          <input id="apiKeyInput" type="password" placeholder="sk-or-v1-..." autocomplete="off" />
+        </label>
+        <button id="saveKeyBtn" class="secondary" title="Save API key to this browser only">Save Key</button>
+        <button id="clearKeyBtn" class="ghost" title="Remove saved key from this browser">Clear Key</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="left">
+        <div class="field">
+          <label for="modelSelect">Model</label>
+          <div class="row">
+            <select id="modelSelect"></select>
+            <button id="refreshModelsBtn" class="ghost" title="Refresh models from OpenRouter">↻</button>
+          </div>
+          <small id="modelHint" class="hint">Models load from OpenRouter when possible; falls back to a preset list.</small>
+        </div>
+
+        <div class="field">
+          <label for="promptInput">Prompt</label>
+          <div class="tabs" role="tablist" aria-label="Prompt Types">
+            <button id="promptTabJob" class="tab" role="tab" aria-selected="false">Job Parsing</button>
+            <button id="promptTabRubric" class="tab" role="tab" aria-selected="false">Rubric Generation</button>
+            <button id="promptTabEval" class="tab active" role="tab" aria-selected="true">Evaluation</button>
+          </div>
+          <textarea id="promptInput" rows="10" placeholder="Write your prompt here..."></textarea>
+        </div>
+
+        <div class="grid-3">
+          <div class="field">
+            <label for="jobInput">Job Description</label>
+            <textarea id="jobInput" rows="8" placeholder="Paste the job description..."></textarea>
+          </div>
+          <div class="field">
+            <label for="rubricInput">Rubric</label>
+            <textarea id="rubricInput" rows="8" placeholder="Define the evaluation rubric..."></textarea>
+          </div>
+          <div class="field">
+            <label for="resumesInput">Resume(s)</label>
+            <textarea id="resumesInput" rows="8" placeholder="Paste one or more resumes...&#10;---&#10;Resume 2...&#10;---&#10;Resume 3..."></textarea>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button id="seedBtn" class="secondary">Load Seed Prompt</button>
+          <button id="clearBtn" class="ghost">Clear All</button>
+          <div class="spacer"></div>
+          <button id="runBtn" class="primary">Run Prompt</button>
+        </div>
+      </section>
+
+      <section class="right">
+        <div class="output-header">
+          <div class="tabs" role="tablist" aria-label="Output">
+            <button id="tabText" class="tab active" role="tab" aria-selected="true" aria-controls="panelText">Text</button>
+            <button id="tabJson" class="tab" role="tab" aria-selected="false" aria-controls="panelJson">Raw JSON</button>
+          </div>
+          <div class="status" id="statusArea">Idle</div>
+        </div>
+        <div class="output-panels">
+          <pre id="panelText" class="panel" role="tabpanel"></pre>
+          <pre id="panelJson" class="panel hidden" role="tabpanel"></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <small>
+        Your API key is only stored in this browser (localStorage). Network requests go directly from your browser to OpenRouter.
+      </small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
